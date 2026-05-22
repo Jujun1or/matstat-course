@@ -5,16 +5,9 @@ from pathlib import Path
 
 np.random.seed(42)
 
-# =========================
-# ПАПКА ДЛЯ ГРАФИКОВ
-# =========================
-
 outdir = Path("images")
 outdir.mkdir(exist_ok=True)
 
-# =========================
-# ШИРИНА ОКНА KDE
-# =========================
 
 def silverman_bandwidth(sample):
     n = len(sample)
@@ -38,10 +31,6 @@ def robust_bandwidth(sample):
     return 0.9 * scale * n ** (-1 / 5)
 
 
-# =========================
-# ГАУССОВО ЯДРО
-# =========================
-
 def gaussian_kernel_density(x, sample, h):
 
     density = np.zeros_like(x)
@@ -53,10 +42,6 @@ def gaussian_kernel_density(x, sample, h):
 
     return density
 
-
-# =========================
-# РАСПРЕДЕЛЕНИЯ
-# =========================
 
 distributions = [
     {
@@ -118,9 +103,6 @@ distributions = [
 
 sample_sizes = [20, 60, 100]
 
-# =========================
-# ОСНОВНОЙ ЦИКЛ
-# =========================
 
 for dist in distributions:
 
@@ -139,9 +121,6 @@ for dist in distributions:
 
         sample = dist["sample"](n)
 
-        # =====================================
-        # ВЕРХНИЙ РЯД — ПЛОТНОСТЬ И KDE
-        # =====================================
 
         ax_density = axes[0, idx]
 
@@ -245,9 +224,6 @@ for dist in distributions:
 
         ax_density.legend(fontsize=8)
 
-        # =====================================
-        # НИЖНИЙ РЯД — ЭФР
-        # =====================================
 
         ax_cdf = axes[1, idx]
 
@@ -314,9 +290,6 @@ for dist in distributions:
 
     plt.close()
 
-# =========================
-# ВЛИЯНИЕ ШИРИНЫ ОКНА
-# =========================
 
 # ---------- Равномерное ----------
 
